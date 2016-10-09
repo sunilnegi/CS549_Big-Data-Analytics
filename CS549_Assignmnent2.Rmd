@@ -1,0 +1,67 @@
+---
+title: "Hypthosis Testing"
+author: "Sunil Negi"
+date: "October 9, 2016"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Hypthosis Testing
+
+This Assignment is a for Hypthosis Testing using an example of Ozone Layer, with small dataset. The factors affecting ozone layer are Temperature, solar, wind. We are looking to calculate Correlation, Confidence Interval and prove null or alternate hypthosis testing.
+
+
+
+```{r cars}
+setwd("C:/Users/SUNIL.NEGI/Documents")
+mydata<-read.csv("ozone_data.csv")
+summary(lm(Ozone ~ Temp+Wind+Temp*Wind, data = mydata))
+
+```
+
+
+# Draws a correlation plot
+```{r}
+pairs(mydata)
+```
+
+
+# Calculate the Pearson's correlation coefficient 
+```{r}
+cor(mydata)
+```
+
+
+# Confidence Interval
+```{r}
+model1=lm(Ozone ~ Temp+Wind+Temp*Wind, data = mydata)
+confint(model1,conf.level=0.95)
+```
+
+
+#Statistical Inference 
+```{r}
+t.test(mydata,conf.level=0.90)
+```
+
+
+# just separating Ozone data from the data sheet
+```{r}
+newdata <- mydata[c(1)]
+```
+
+Null Hypotheis 		    H0 : Value of Ozone in population is > or = to 50
+Alternate Hypotheis 	Ha: Value of Ozone in population in < 50
+
+# Applying T test
+```{r}
+t.test(newdata,alternative = "less", mu= 50)
+```
+
+Alpha = 1- confidence percentage (example 1-0.95 =0.05
+if p < alpha then reject  null hypothesis
+So in our example since p value is < alpha we have to reject null hypothesis 
+Which means Value of Ozone in population is Less than 50
